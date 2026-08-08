@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanu Gaikwad | Portfolio</title>
+    <title>Shanyu Gaikwad | Portfolio</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -12,7 +12,6 @@
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             --accent: #10b981; /* Terminal Emerald */
-            --accent-amber: #f59e0b; /* Status Active Highlight */
             --border-color: #1e293b;
         }
 
@@ -29,7 +28,6 @@
             min-height: 100vh;
         }
 
-        /* Responsive Layout Structure */
         .portfolio-wrapper {
             display: flex;
             min-height: 100vh;
@@ -47,7 +45,7 @@
         }
 
         .profile-info {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .avatar {
@@ -71,9 +69,15 @@
             color: var(--accent);
             font-size: 1rem;
             font-weight: bold;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        .meta-stamp {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
 
         .bio {
@@ -83,7 +87,6 @@
             max-width: 400px;
         }
 
-        /* Interactive Filter Matrix */
         .skills-section {
             margin: 24px 0;
         }
@@ -104,30 +107,18 @@
 
         .skill-badge {
             background-color: var(--bg-main);
-            color: var(--text-secondary);
-            padding: 5px 12px;
+            color: var(--text-primary);
+            padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.75rem;
             border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
         }
 
-        .skill-badge:hover, .skill-badge.active {
-            color: var(--bg-main);
-            background-color: var(--accent);
-            border-color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Network Connections & CTA buttons */
         .social-links {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-top: 20px;
-            margin-bottom: 24px;
         }
 
         .btn {
@@ -141,6 +132,7 @@
             text-decoration: none;
             transition: all 0.2s ease;
             border: 1px solid var(--border-color);
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -163,36 +155,7 @@
             border-color: var(--accent);
         }
 
-        /* System Metrics Dashboard (Expanded Console) */
-        .status-panel {
-            background-color: rgba(11, 15, 25, 0.6);
-            border: 1px dashed var(--border-color);
-            padding: 14px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            text-align: left;
-        }
-
-        .status-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-
-        .status-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .status-label {
-            color: var(--text-muted);
-        }
-
-        .status-value {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Right Split Pane - Dynamic Stream Layout */
+        /* Right Split Pane - Scrollable Registry Content */
         .right-pane {
             flex: 1;
             padding: 40px 20px;
@@ -205,9 +168,14 @@
             letter-spacing: 0.15em;
             color: var(--text-muted);
             margin-bottom: 30px;
+            margin-top: 40px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
         }
 
         .section-header::after {
@@ -217,7 +185,7 @@
             background-color: var(--border-color);
         }
 
-        /* Timeline Items & Drawer Toggles */
+        /* Timeline Stream Layout */
         .timeline {
             display: flex;
             flex-direction: column;
@@ -258,14 +226,7 @@
             align-items: flex-start;
             margin-bottom: 8px;
             flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .title-group {
-            display: flex;
-            align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .item-title {
@@ -274,14 +235,16 @@
             color: var(--text-primary);
         }
 
-        .status-tag {
-            font-size: 0.65rem;
-            color: var(--accent-amber);
-            border: 1px solid var(--accent-amber);
+        .item-status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #f59e0b;
+            border: 1px solid #f59e0b;
             padding: 1px 6px;
             border-radius: 3px;
             font-weight: bold;
-            letter-spacing: 0.05em;
+            margin-left: 6px;
         }
 
         .item-category {
@@ -297,84 +260,9 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 12px;
         }
 
-        /* Tech Badges Per Project */
-        .item-tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 14px;
-        }
-
-        .tech-pill {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 2px 8px;
-            border-radius: 3px;
-        }
-
-        .action-row {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .item-action, .drawer-toggle {
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-family: inherit;
-        }
-
-        .item-action:hover, .drawer-toggle:hover {
-            text-decoration: underline;
-        }
-
-        /* Expandable Drawer Details */
-        .project-drawer {
-            display: none;
-            margin-top: 14px;
-            padding: 14px;
-            background-color: rgba(19, 26, 38, 0.7);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 4px 4px 0;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
-        .project-drawer.open {
-            display: block;
-        }
-
-        .drawer-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .drawer-list li {
-            position: relative;
-            padding-left: 16px;
-            margin-bottom: 6px;
-        }
-
-        .drawer-list li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* Desktop Adjustments */
+        /* Desktop Viewport Split Configuration */
         @media (min-width: 900px) {
             .portfolio-wrapper {
                 flex-direction: row;
@@ -388,7 +276,7 @@
                 left: 0;
                 border-bottom: none;
                 border-right: 1px solid var(--border-color);
-                padding: 50px 40px;
+                padding: 60px 40px;
             }
 
             .right-pane {
@@ -402,236 +290,133 @@
 
     <div class="portfolio-wrapper">
         
-        <!-- Left Side Pane -->
+        <!-- Left Side Pane (Fixed Desktop Panel) -->
         <aside class="left-pane">
             <div class="profile-info">
-                <img src="https://github.com/shanyu9596-hue.png" alt="Shanu Gaikwad" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&h=150'">
-                <h1>Shanu Gaikwad</h1>
+                <img src="https://github.com/shanyu9596-hue.png" alt="Shanyu Gaikwad" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&h=150'">
+                <h1>Shanyu Gaikwad</h1>
                 <div class="role-title">Electrical & Computer Engineer</div>
+                <div class="meta-stamp">DOB: 06.08.2007 | MIT-WPU, Pune</div>
                 <p class="bio">Bridging the architecture gap between physical electrical systems and high-level software frameworks. Focused on clean engineering compilation.</p>
                 
-                <!-- Interactive Skill Matrix Filter -->
                 <div class="skills-section">
-                    <div class="skills-title">Filter By Competency</div>
+                    <div class="skills-title">Core Competencies</div>
                     <div class="skills-tags">
-                        <span class="skill-badge active" onclick="filterRegistry('ALL', this)">All</span>
-                        <span class="skill-badge" onclick="filterRegistry('EV / BMS', this)">EV / BMS</span>
-                        <span class="skill-badge" onclick="filterRegistry('Software', this)">Software</span>
-                        <span class="skill-badge" onclick="filterRegistry('Hardware', this)">Hardware</span>
-                        <span class="skill-badge" onclick="filterRegistry('Systems', this)">Systems</span>
+                        <div class="skill-badge">C</div>
+                        <div class="skill-badge">Python</div>
+                        <div class="skill-badge">Circuit Design</div>
+                        <div class="skill-badge">IoT Architecture</div>
+                        <div class="skill-badge">PCB Engineering</div>
+                        <div class="skill-badge">Time Series Data</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Intersecting Social Channels -->
+            <!-- Side actions panel -->
             <div class="social-links">
-                <a href="mailto:shanyu9596@gmail.com" class="btn btn-primary">✉️ Email Me</a>
+                <a href="mailto:shanyu9596@gmail.com" class="btn btn-primary" onclick="navigator.clipboard.writeText('shanyu9596@gmail.com'); alert('Email address copied to clipboard!');">✉️ Email Me</a>
                 <a href="https://github.com/shanyu9596-hue" class="btn btn-secondary" target="_blank">⚡ GitHub Engine</a>
                 <a href="https://www.instagram.com/shanyu7770?igsh=MTE0OGRiMms0Y2Fqdg==" class="btn btn-secondary" target="_blank">📸 Instagram</a>
             </div>
-
-            <!-- Enhanced System Metrics Dashboard -->
-            <div class="status-panel">
-                <div class="status-row">
-                    <span class="status-label">SYS_STATUS:</span>
-                    <span class="status-value" style="color: #10b981;">OFFLINE_LOCAL</span>
-                </div>
-                <div class="status-row">
-                    <span class="status-label">SYS_TIME:</span>
-                    <span id="sys-time" class="status-value">--:--:--</span>
-                </div>
-                <div class="status-row">
-                    <span class="status-label">SESSION_UPTIME:</span>
-                    <span id="sys-uptime" class="status-value">0s</span>
-                </div>
-                <div class="status-row">
-                    <span class="status-label">LOCAL_VIEWS:</span>
-                    <span id="view-count" class="status-value">0</span>
-                </div>
-            </div>
         </aside>
 
-        <!-- Right Side Pane -->
+        <!-- Right Side Pane (Dynamic Chronological Main Feed) -->
         <main class="right-pane">
             <div class="section-header">Engineering Registry</div>
-            
-            <div id="timeline-container" class="timeline">
-                <!-- Dynamic Stream Render -->
-            </div>
+            <div id="timeline-container" class="timeline"></div>
+
+            <div class="section-header">Academic Chronology</div>
+            <div id="education-container" class="timeline"></div>
         </main>
 
     </div>
 
     <script>
-        // 🛠️ Dynamic Engineering Registry Array (Including VAJRA EV Platform)
         const projectsRegistry = [
             {
-                id: "vajra-ev",
                 title: "VAJRA – Peer-to-Peer EV Charging Platform",
-                statusTag: "MVP READY",
-                category: "EV / BMS",
-                description: "Developed a peer-to-peer EV charging MVP connecting EV owners with private charger hosts to optimize charger utilization and eliminate range anxiety.",
-                techStack: ["HTML", "CSS", "JavaScript", "Bootstrap", "Firebase", "Google Maps API", "REST APIs", "BMS (Planned)", "IoT"],
-                link: "https://github.com/shanyu9596-hue",
-               
-                ]
+                category: "Full Stack / Software",
+                status: "Completed",
+                description: "Developed a peer-to-peer EV charging platform connecting EV owners with private charger hosts. Implemented real-time charger discovery, booking, dashboards, and planned BMS integration."
             },
             {
-                id: "iot-bms",
                 title: "IoT Battery Management System (BMS)",
-                statusTag: "ACTIVE RESEARCH",
-                category: "EV / BMS",
-                description: "Designing an intelligent telemetry platform to monitor cell state-of-charge (SoC), operational health profiles, and safety matrices over IoT channels.",
-                techStack: ["C / C++", "Embedded Systems", "CAN Bus", "Circuit Theory", "IoT"],
-                link: "https://github.com/shanyu9596-hue",
-                details: [
-                    "Engineered physical-layer sensing circuits for multi-cell pack voltage monitoring.",
-                    "Integrated wireless telemetry protocols for real-time remote diagnostics and thermal run-away detection."
-                ]
+                category: "Embedded Systems",
+                status: "Active Research",
+                description: "Designing an intelligent telemetry platform to monitor cell state-of-charge (SoC), operational health profiles, and safety matrices over IoT channels."
             },
             {
-                id: "resume-parser",
-                title: "Automated Resume Parser Engine",
-                statusTag: "",
-                category: "Software",
-                description: "An intelligent text-parsing framework engineered using a Python backend and Flask pipeline instances to automate structural information extraction routines.",
-                techStack: ["Python", "Flask", "Regex", "Google Colab", "Data Extraction"],
-                link: "https://github.com/shanyu9596-hue",
-                details: [
-                    "Engineered a multi-step execution pipeline to isolate structural layout patterns from unformatted documents.",
-                    "Designed light API endpoints for real-time parsing requests."
-                ]
+                title: "Wind Farm Power Output Forecasting",
+                category: "Data Science / Power Systems",
+                status: "Active Research",
+                description: "Implemented a time-series predictive modeling engine in Python analyzing wind speed and directional variables to forecast generational capacity trends."
             },
             {
-                id: "pcb-street-light",
                 title: "PCB-Integrated IoT Street Lighting System",
-                statusTag: "",
-                category: "Hardware",
-                description: "Engineered and routed a custom printed circuit board (PCB) to handle networked microcontroller infrastructure for automated municipal illumination arrays.",
-                techStack: ["Hardware", "PCB Design", "Circuit Theory", "Microcontrollers"],
-                link: "https://github.com/shanyu9596-hue",
-                details: [
-                    "Designed schematic layouts and PCB traces optimized for low power consumption.",
-                    "Integrated ambient sensing loops for autonomous intensity regulation."
-                ]
+                category: "Hardware / PCB Design",
+                status: "Completed",
+                description: "Engineered and routed a custom printed circuit board (PCB) to handle networked microcontroller infrastructure for automated municipal illumination arrays."
             },
             {
-                id: "compiler-arch",
                 title: "Custom Language Compiler Architecture",
-                statusTag: "",
-                category: "Systems",
-                description: "Designed a lightweight lexical analyzer and syntactic code compiler parser built to process specialized text grammar into targeted execution trees.",
-                techStack: ["C / C++", "Compiler Design", "Data Structures", "Lexical Analysis"],
-                link: "https://github.com/shanyu9596-hue",
-                details: [
-                    "Created custom tokenization passes and AST (Abstract Syntax Tree) generators.",
-                    "Built lightweight memory management routines during parsing execution."
-                ]
+                category: "Software",
+                status: "Completed",
+                description: "Designed a lightweight lexical analyzer and syntactic code compiler parser built to process specialized text grammar into targeted execution trees."
+            },
+            {
+                title: "Free-Space Laser Communication Assembly",
+                category: "Hardware",
+                status: "Completed",
+                description: "Developed an optical communication system using laser diodes and receiver circuit configurations to achieve wireless point-to-point physical layer data transfer."
+            },
+            {
+                title: "Automated Resume Parser Engine",
+                category: "Software",
+                status: "Completed",
+                description: "An intelligent text parsing framework engineered using a Python backend and Flask pipeline instances to automate structural information extraction routines."
             }
         ];
 
-        let activeCategoryFilter = "ALL";
-
-        function renderTimeline() {
-            const container = document.getElementById('timeline-container');
-            const filtered = activeCategoryFilter === "ALL" 
-                ? projectsRegistry 
-                : projectsRegistry.filter(p => p.category === activeCategoryFilter);
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.9rem;">[NO_MODULES_FOUND_FOR_CATEGORY: ${activeCategoryFilter}]</div>`;
-                return;
+        const educationRegistry = [
+            {
+                title: "MIT World Peace University (MIT-WPU)",
+                category: "Undergraduate",
+                status: "Current",
+                description: "Pursuing Higher Education track in Pune, focusing on B.Tech Electrical & Computer Engineering."
+            },
+            {
+                title: "Vishwanathappa Hurne Junior College (VHJC)",
+                category: "Higher Secondary (11th & 12th)",
+                status: "Completed",
+                description: "Completed secondary education matrix in Nanded, establishing core mathematical and scientific conceptual baselines."
+            },
+            {
+                title: "Gyan Mata Vidya Vihar",
+                category: "Primary & Secondary School (Till 10th)",
+                status: "Completed",
+                description: "Acquired fundamental elementary foundations in Nanded."
             }
+        ];
 
-            container.innerHTML = filtered.map(item => `
+        function renderTimeline(data, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="item-header">
-                        <div class="title-group">
+                        <div>
                             <span class="item-title">${item.title}</span>
-                            ${item.statusTag ? `<span class="status-tag">${item.statusTag}</span>` : ''}
+                            ${(item.status && item.status !== 'Completed') ? `<span class="item-status">${item.status}</span>` : ''}
                         </div>
                         <span class="item-category">${item.category}</span>
                     </div>
                     <p class="item-desc">${item.description}</p>
-                    
-                    <div class="item-tech-stack">
-                        ${item.techStack.map(tech => `<span class="tech-pill">${tech}</span>`).join('')}
-                    </div>
-
-                    <div class="action-row">
-                        <button class="drawer-toggle" onclick="toggleDrawer('${item.id}')">[+] Expand Details</button>
-                        <a href="${item.link}" class="item-action" target="_blank">Execute Registry Link →</a>
-                    </div>
-
-                    <div id="drawer-${item.id}" class="project-drawer">
-                        <ul class="drawer-list">
-                            ${item.details.map(d => `<li>${d}</li>`).join('')}
-                        </ul>
-                    </div>
                 </div>
             `).join('');
         }
 
-        // 🏷️ Filter Registry Matrix Handler
-        function filterRegistry(category, element) {
-            activeCategoryFilter = category;
-            document.querySelectorAll('.skill-badge').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-            renderTimeline();
-        }
-
-        // 📂 Expandable Drawer Toggle
-        function toggleDrawer(id) {
-            const drawer = document.getElementById(`drawer-${id}`);
-            const button = drawer.previousElementSibling.querySelector('.drawer-toggle');
-            if (drawer.classList.contains('open')) {
-                drawer.classList.remove('open');
-                button.innerText = '[+] Expand Details';
-            } else {
-                drawer.classList.add('open');
-                button.innerText = '[-] Collapse Details';
-            }
-        }
-
-        // ⏱️ Realtime Dashboard Clock & Session Uptime
-        let sessionSeconds = 0;
-        function startSystemMetrics() {
-            // Live clock
-            setInterval(() => {
-                const now = new Date();
-                document.getElementById('sys-time').innerText = now.toTimeString().split(' ')[0];
-            }, 1000);
-
-            // Session Uptime
-            setInterval(() => {
-                sessionSeconds++;
-                const mins = Math.floor(sessionSeconds / 60);
-                const secs = sessionSeconds % 60;
-                document.getElementById('sys-uptime').innerText = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
-            }, 1000);
-        }
-
-        // 📊 Offline LocalStorage Counter
-        function initializeViewCounter() {
-            try {
-                let localViews = localStorage.getItem('portfolio_local_views');
-                if (!localViews) {
-                    localViews = 148; 
-                } else {
-                    localViews = parseInt(localViews) + 1;
-                }
-                localStorage.setItem('portfolio_local_views', localViews);
-                document.getElementById('view-count').innerText = localViews;
-            } catch (e) {
-                document.getElementById('view-count').innerText = "148";
-            }
-        }
-
-        // Boot system scripts
-        renderTimeline();
-        startSystemMetrics();
-        initializeViewCounter();
+        renderTimeline(projectsRegistry, 'timeline-container');
+        renderTimeline(educationRegistry, 'education-container');
     </script>
 </body>
 </html>
