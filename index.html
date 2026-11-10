@@ -1,434 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanyu Gaikwad | Portfolio</title>
-    <style>
-        :root {
-            --bg-main: #0b0f19;
-            --card-left: #131a26;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent: #10b981; /* Terminal Emerald */
-            --border-color: #1e293b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanyu Gaikwad Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* Layout: fixed identity sidebar on desktop, scrolling engineering log on the right; stacks on phones. */
+  :root {
+    --bg: #0b0f19;
+    --panel: #131a26;
+    --card: #101623;
+    --fg: #f8fafc;
+    --fg2: #a3b1c6;
+    --muted: #8493a8;
+    --accent: #10b981;
+    --accent-ink: #04130d;
+    --accent-soft: rgba(16, 185, 129, 0.12);
+    --border: #1e293b;
+    --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f3f7f5; --panel: #e7efeb; --card: #ffffff; --fg: #0f1b17; --fg2: #3d5148;
+      --muted: #587066; --accent: #047857; --accent-ink: #ffffff;
+      --accent-soft: rgba(4, 120, 87, 0.1); --border: #cddbd3; color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f7f5; --panel: #e7efeb; --card: #ffffff; --fg: #0f1b17; --fg2: #3d5148;
+    --muted: #587066; --accent: #047857; --accent-ink: #ffffff;
+    --accent-soft: rgba(4, 120, 87, 0.1); --border: #cddbd3; color-scheme: light;
+  }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-        body {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            min-height: 100vh;
-        }
+  .wrap { display: flex; flex-direction: column; min-height: 100vh; }
 
-        .portfolio-wrapper {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
+  /* Sidebar */
+  .side {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding-block: 40px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .monogram {
+    width: 88px; height: 88px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: grid; place-items: center;
+    font-size: 1.9rem; font-weight: 700; letter-spacing: -0.04em;
+    color: var(--accent); background: var(--accent-soft);
+    margin-bottom: 20px;
+  }
+  h1 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 8px; text-wrap: balance; }
+  .role { color: var(--accent); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .stamp { font-size: 0.74rem; color: var(--muted); margin-bottom: 14px; }
+  .bio { font-size: 0.86rem; line-height: 1.65; color: var(--fg2); max-width: 36ch; }
 
-        /* Left Split Pane - Sticky Sidebar */
-        .left-pane {
-            background-color: var(--card-left);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
-        }
+  .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { background: var(--bg); color: var(--fg); padding: 4px 10px; border-radius: 4px; font-size: 0.74rem; border: 1px solid var(--border); }
 
-        .profile-info {
-            margin-bottom: 30px;
-        }
+  .contact { display: flex; flex-direction: column; gap: 10px; }
+  .mail-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+  .mail-addr {
+    flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); font-size: 0.78rem; color: var(--fg); overflow-wrap: anywhere; user-select: all;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 16px; border-radius: 6px; font: inherit; font-weight: 700; font-size: 0.8rem;
+    text-decoration: none; border: 1px solid var(--border); color: var(--fg); background: transparent; cursor: pointer;
+    transition: border-color .15s ease, background-color .15s ease;
+  }
+  .btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent); opacity: .9; }
 
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            margin-bottom: 24px;
-            object-fit: cover;
-        }
+  /* Main */
+  .main {
+    flex: 1; min-width: 0; max-width: 880px;
+    padding-block: 40px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
+  .head { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin: 0 0 20px; display: flex; align-items: center; gap: 12px; font-weight: 500; }
+  .head::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .head.spaced { margin-top: 56px; }
 
-        .role-title {
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .chip {
+    font: inherit; font-size: 0.74rem; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--fg2); border: 1px solid var(--border);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--fg); }
+  .chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
 
-        .meta-stamp {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
+  .list { display: flex; flex-direction: column; gap: 14px; }
+  .item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 18px 18px 18px 20px; display: flex; flex-direction: column; gap: 10px;
+    transition: border-color .2s ease;
+  }
+  .item:hover { border-color: var(--accent); }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .tw { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .title { font-size: 1.1rem; font-weight: 700; line-height: 1.3; text-wrap: balance; }
+  .sub { font-size: 0.82rem; color: var(--fg2); line-height: 1.45; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; flex: none;
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent);
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .badge.current { color: var(--fg2); background: transparent; border-color: var(--border); }
+  .cat { font-size: 0.74rem; color: var(--muted); }
+  .desc { font-size: 0.86rem; line-height: 1.65; color: var(--fg2); max-width: 70ch; }
 
-        .bio {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            max-width: 400px;
-        }
+  .toast {
+    position: fixed; left: 50%; transform: translateX(-50%);
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 0.8rem;
+    padding: 10px 16px; border-radius: 6px; z-index: 20;
+  }
 
-        .skills-section {
-            margin: 24px 0;
-        }
-        
-        .skills-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
+  @media (min-width: 900px) {
+    .wrap { flex-direction: row; }
+    .side {
+      position: fixed; top: 0; bottom: 0; left: 0; width: 380px; overflow-y: auto;
+      border-bottom: none; border-right: 1px solid var(--border);
+      padding-block: 56px; padding-inline: 40px; justify-content: space-between;
+    }
+    .main { margin-left: 380px; padding-block: 56px 72px; padding-inline: 64px 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
 
-        .skills-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-badge {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--bg-main);
-            border-color: var(--accent);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent);
-        }
-
-        /* Right Split Pane - Scrollable Registry Content */
-        .right-pane {
-            flex: 1;
-            padding: 40px 20px;
-            max-width: 800px;
-        }
-
-        .section-header {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-header:first-of-type {
-            margin-top: 0;
-        }
-
-        .section-header::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--border-color);
-        }
-
-        /* Timeline Stream Layout */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 24px;
-            border-left: 2px solid var(--border-color);
-            transition: border-color 0.3s;
-        }
-
-        .timeline-item:hover {
-            border-left-color: var(--accent);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--bg-main);
-            border: 2px solid var(--border-color);
-            transition: background-color 0.3s;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            background-color: var(--accent);
-            border-color: var(--accent);
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .item-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .item-status {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #f59e0b;
-            border: 1px solid #f59e0b;
-            padding: 1px 6px;
-            border-radius: 3px;
-            font-weight: bold;
-            margin-left: 6px;
-        }
-
-        .item-category {
-            font-size: 0.75rem;
-            color: var(--accent);
-            background-color: rgba(16, 185, 129, 0.1);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .item-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Desktop Viewport Split Configuration */
-        @media (min-width: 900px) {
-            .portfolio-wrapper {
-                flex-direction: row;
-            }
-
-            .left-pane {
-                width: 380px;
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                border-bottom: none;
-                border-right: 1px solid var(--border-color);
-                padding: 60px 40px;
-            }
-
-            .right-pane {
-                margin-left: 380px;
-                padding: 60px 60px 60px 80px;
-            }
-        }
-    </style>
 </head>
 <body>
-
-    <div class="portfolio-wrapper">
-        
-        <!-- Left Side Pane (Fixed Desktop Panel) -->
-        <aside class="left-pane">
-            <div class="profile-info">
-                <img src="https://github.com/shanyu9596-hue.png" alt="Shanyu Gaikwad" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&h=150'">
-                <h1>Shanyu Gaikwad</h1>
-                <div class="role-title">Electrical & Computer Engineer</div>
-                <div class="meta-stamp">DOB: 06.08.2007 | MIT-WPU, Pune</div>
-                <p class="bio">Bridging the architecture gap between physical electrical systems and high-level software frameworks. Focused on clean engineering compilation.</p>
-                
-                <div class="skills-section">
-                    <div class="skills-title">Core Competencies</div>
-                    <div class="skills-tags">
-                        <div class="skill-badge">C / C++</div>
-                        <div class="skill-badge">Python</div>
-                        <div class="skill-badge">MATLAB</div>
-                        <div class="skill-badge">Power Systems</div>
-                        <div class="skill-badge">IoT & Sensors</div>
-                        <div class="skill-badge">Linux Automation</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side actions panel -->
-            <div class="social-links">
-                <a href="mailto:shanyu9596@gmail.com" class="btn btn-primary" onclick="navigator.clipboard.writeText('shanyu9596@gmail.com'); alert('Email address copied to clipboard!');">✉️ Email Me</a>
-                <a href="https://github.com/shanyu9596-hue" class="btn btn-secondary" target="_blank">⚡ GitHub Engine</a>
-                <a href="https://www.instagram.com/shanyu7770?igsh=MTE0OGRiMms0Y2Fqdg==" class="btn btn-secondary" target="_blank">📸 Instagram</a>
-            </div>
-        </aside>
-
-        <!-- Right Side Pane (Dynamic Chronological Main Feed) -->
-        <main class="right-pane">
-            <div class="section-header">Engineering Registry</div>
-            <div id="timeline-container" class="timeline"></div>
-
-            <div class="section-header">Academic Chronology</div>
-            <div id="education-container" class="timeline"></div>
-        </main>
-
+<div class="wrap">
+  <aside class="side">
+    <div>
+      <div class="monogram" aria-hidden="true">SG</div>
+      <h1>Shanyu Gaikwad</h1>
+      <div class="role">Electrical &amp; Computer Engineer</div>
+      <div class="stamp">DOB: 06.08.2007 | MIT-WPU, Pune</div>
+      <p class="bio">Bridging the architecture gap between physical electrical systems and high-level software frameworks. Focused on clean engineering compilation.</p>
     </div>
 
-    <script>
-        const projectsRegistry = [
-            {
-                title: "GridTwin AI – Physics-Informed Fault Localization & Resilience Optimization",
-                category: "Python / AI / Power Systems",
-                status: "Active Research",
-                description: "Integrates physical power grid equations with AI models for rapid fault localization and automated resilience optimization in electrical distribution networks."
-            },
-            {
-                title: "Fuzzy Logic-Based Microgrid Energy Management System",
-                category: "MATLAB / Fuzzy Logic",
-                status: "Completed",
-                description: "Implemented dynamic fuzzy inference control algorithms in MATLAB/Simulink to optimize power-dispatch, balance microgrid generation, and manage energy storage."
-            },
-            {
-                title: "Wind Farm Power Output Prediction Using Machine Learning",
-                category: "Python / Random Forest / ML",
-                status: "Completed",
-                description: "Engineered a time-series predictive modeling engine in Python using Random Forest algorithms to analyze meteorological parameters and forecast generational capacity."
-            },
-            {
-                title: "Mini Electric Crane Using Gear and Pulley Mechanism",
-                category: "Electrical Machines / Motor Control",
-                status: "Completed",
-                description: "Designed a physical electromechanical lifting assembly combining targeted gear ratios, pulley systems, and motor torque control for optimized load operations."
-            },
-            {
-                title: "ESP32-Based DC Motor Monitoring and Control System",
-                category: "ESP32 / IoT / Sensors",
-                status: "Completed",
-                description: "Built an ESP32 telemetry platform with automated safety logic to monitor rotational speed, load current, and temperature, featuring overcurrent and thermal protection."
-            },
-            {
-                title: "AI Resume Parser and Job Description Matching Dashboard",
-                category: "Python / Flask / spaCy",
-                status: "Completed",
-                description: "Developed a web dashboard using Flask and custom spaCy NLP extraction pipelines to parse candidate attributes and match them against job requirements."
-            },
-            {
-                title: "Smart Motor Control Center – Version 3",
-                category: "Linux / Electrical Automation",
-                status: "Completed",
-                description: "Architected a Linux-driven industrial automation interface for centralized motor control, diagnostic telemetry logging, and automated fault detection."
-            },
-            {
-                title: "VoltVision – Battery Intelligence Platform",
-                category: "AI / EV / Battery Analytics",
-                status: "Active Research",
-                description: "Building an AI analytics engine to monitor cell State-of-Charge (SoC), State-of-Health (SoH), thermal profiles, and degradation trends for EV battery packs."
-            },
-            {
-                title: "PIR Motion-Activated Light – Zero PCB",
-                category: "Electronics / Embedded Systems",
-                status: "Completed",
-                description: "Engineered a zero-PCB point-to-point hardwired circuit using PIR motion sensors and transistor switching for automated energy-efficient illumination."
-            }
-        ];
+    <div>
+      <div class="label">Core Competencies</div>
+      <div class="tags">
+        <span class="tag">C / C++</span><span class="tag">Python</span><span class="tag">MATLAB</span>
+        <span class="tag">Power Systems</span><span class="tag">IoT &amp; Sensors</span><span class="tag">Linux Automation</span>
+      </div>
+    </div>
 
-        const educationRegistry = [
-            {
-                title: "MIT World Peace University (MIT-WPU)",
-                category: "Undergraduate",
-                status: "Current",
-                description: "Pursuing Higher Education track in Pune, focusing on B.Tech Electrical & Computer Engineering."
-            },
-            {
-                title: "Vishwanathappa Hurne Junior College (VHJC)",
-                category: "Higher Secondary (11th & 12th)",
-                status: "Completed",
-                description: "Completed secondary education matrix in Nanded, establishing core mathematical and scientific conceptual baselines."
-            },
-            {
-                title: "Gyan Mata Vidya Vihar",
-                category: "Primary & Secondary School (Till 10th)",
-                status: "Completed",
-                description: "Acquired fundamental elementary foundations in Nanded."
-            }
-        ];
+    <div class="contact">
+      <div class="label">Contact</div>
+      <div class="mail-row">
+        <span class="mail-addr" id="mail">shanyu9596@gmail.com</span>
+        <button class="btn btn-primary" id="copy" type="button">Copy</button>
+      </div>
+      <a class="btn" href="https://github.com/shanyu9596-hue" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.instagram.com/shanyu7770?igsh=MTE0OGRiMms0Y2Fqdg==" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </aside>
 
-        function renderTimeline(data, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = data.map(item => `
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="item-header">
-                        <div>
-                            <span class="item-title">${item.title}</span>
-                            ${(item.status && item.status !== 'Completed') ? `<span class="item-status">${item.status}</span>` : ''}
-                        </div>
-                        <span class="item-category">${item.category}</span>
-                    </div>
-                    <p class="item-desc">${item.description}</p>
-                </div>
-            `).join('');
-        }
+  <main class="main">
+    <h2 class="head">Engineering Registry</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filter projects by domain"></div>
+    <div class="list" id="projects"></div>
 
-        renderTimeline(projectsRegistry, 'timeline-container');
-        renderTimeline(educationRegistry, 'education-container');
-    </script>
+    <h2 class="head spaced">Academic Chronology</h2>
+    <div class="list" id="education"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+  const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  const projects = [
+    { title: "GridTwin AI", subtitle: "Physics-Informed Fault Localization & Resilience Optimization", category: "Python / AI / Power Systems", domains: ["power", "ai"],
+      description: "Integrates physical power grid equations with AI models for rapid fault localization and automated resilience optimization in electrical distribution networks." },
+    { title: "Microgrid Energy Management", subtitle: "Fuzzy Logic-Based Control System", category: "MATLAB / Fuzzy Logic", domains: ["power"],
+      description: "Implemented dynamic fuzzy inference control algorithms in MATLAB/Simulink to optimize power-dispatch, balance microgrid generation, and manage energy storage." },
+    { title: "Wind Farm Power Prediction", subtitle: "Machine Learning Forecast of Power Output", category: "Python / Random Forest / ML", domains: ["ai", "power"],
+      description: "Engineered a time-series predictive modeling engine in Python using Random Forest algorithms to analyze meteorological parameters and forecast generational capacity." },
+    { title: "Mini Electric Crane", subtitle: "Gear and Pulley Mechanism", category: "Electrical Machines / Motor Control", domains: ["embedded"],
+      description: "Designed a physical electromechanical lifting assembly combining targeted gear ratios, pulley systems, and motor torque control for optimized load operations." },
+    { title: "ESP32 DC Motor Controller", subtitle: "Monitoring and Control System", category: "ESP32 / IoT / Sensors", domains: ["embedded"],
+      description: "Built an ESP32 telemetry platform with automated safety logic to monitor rotational speed, load current, and temperature, featuring overcurrent and thermal protection." },
+    { title: "AI Resume Parser", subtitle: "Job Description Matching Dashboard", category: "Python / Flask / spaCy", domains: ["ai", "software"],
+      description: "Developed a web dashboard using Flask and custom spaCy NLP extraction pipelines to parse candidate attributes and match them against job requirements." },
+    { title: "Smart Motor Control Center", subtitle: "Version 3", category: "Linux / Electrical Automation", domains: ["software", "embedded"],
+      description: "Architected a Linux-driven industrial automation interface for centralized motor control, diagnostic telemetry logging, and automated fault detection." },
+    { title: "VoltVision", subtitle: "Battery Intelligence Platform", category: "AI / EV / Battery Analytics", domains: ["ai", "power"],
+      description: "Building an AI analytics engine to monitor cell State-of-Charge (SoC), State-of-Health (SoH), thermal profiles, and degradation trends for EV battery packs." },
+    { title: "PIR Motion-Activated Light", subtitle: "Zero PCB Build", category: "Electronics / Embedded Systems", domains: ["embedded"],
+      description: "Engineered a zero-PCB point-to-point hardwired circuit using PIR motion sensors and transistor switching for automated energy-efficient illumination." }
+  ].map(p => ({ ...p, status: "Completed" }));
+
+  const education = [
+    { title: "MIT World Peace University (MIT-WPU)", category: "Undergraduate", status: "Current",
+      description: "Pursuing Higher Education track in Pune, focusing on B.Tech Electrical & Computer Engineering." },
+    { title: "Vishwanathappa Hurne Junior College (VHJC)", category: "Higher Secondary (11th & 12th)", status: "Completed",
+      description: "Completed secondary education matrix in Nanded, establishing core mathematical and scientific conceptual baselines." },
+    { title: "Gyan Mata Vidya Vihar", category: "Primary & Secondary School (Till 10th)", status: "Completed",
+      description: "Acquired fundamental elementary foundations in Nanded." }
+  ];
+
+  const filters = [
+    { id: "all", label: "All" }, { id: "power", label: "Power & Energy" }, { id: "ai", label: "AI / ML" },
+    { id: "embedded", label: "Embedded & IoT" }, { id: "software", label: "Software" }
+  ];
+
+  const card = it => `
+    <article class="item">
+      <div class="top">
+        <div class="tw"><h3 class="title">${it.title}</h3>${it.subtitle ? `<div class="sub">${it.subtitle}</div>` : ""}</div>
+        ${it.status === "Completed"
+          ? `<span class="badge">${CHECK}Completed</span>`
+          : `<span class="badge current">${it.status}</span>`}
+      </div>
+      <div class="cat">${it.category}</div>
+      <p class="desc">${it.description}</p>
+    </article>`;
+
+  document.getElementById("education").innerHTML = education.map(card).join("");
+
+  const list = document.getElementById("projects");
+  const bar = document.getElementById("filters");
+  let active = "all";
+
+  function draw() {
+    const rows = projects.filter(p => active === "all" || p.domains.includes(active));
+    list.innerHTML = rows.map(card).join("");
+    bar.innerHTML = filters.map(f => {
+      const n = f.id === "all" ? projects.length : projects.filter(p => p.domains.includes(f.id)).length;
+      return `<button class="chip" type="button" data-id="${f.id}" aria-pressed="${f.id === active}">${f.label} (${n})</button>`;
+    }).join("");
+  }
+  bar.addEventListener("click", e => {
+    const b = e.target.closest("button[data-id]");
+    if (!b) return;
+    active = b.dataset.id;
+    draw();
+    const again = bar.querySelector(`[data-id="${active}"]`);
+    if (again) again.focus();
+  });
+  draw();
+
+  const toast = document.getElementById("toast");
+  let timer;
+  function say(msg) {
+    toast.textContent = msg; toast.hidden = false;
+    clearTimeout(timer); timer = setTimeout(() => { toast.hidden = true; }, 1800);
+  }
+  document.getElementById("copy").addEventListener("click", () => {
+    const el = document.getElementById("mail");
+    const fallback = () => {
+      const r = document.createRange(); r.selectNodeContents(el);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      say("Address selected");
+    };
+    try {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => say("Email address copied"), fallback);
+    } catch (e) { fallback(); }
+  });
+</script>
+
 </body>
 </html>
